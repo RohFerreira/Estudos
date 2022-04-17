@@ -1,0 +1,84 @@
+import tkinter as tk
+
+root = tk.Tk()
+root.title('Calculadora de IMC')
+root.geometry('300x400')
+
+
+def calcular():
+    if box1.get() == '':
+        erro1 = tk.Label(root, text='Informações incompletas!', font=16)
+        erro1.grid(column=1, row=5, padx=10, pady=20, columnspan=4, sticky='news')
+    elif box2.get() == '':
+        erro1 = tk.Label(root, text='Informações incompletas!', font=16)
+        erro1.grid(column=1, row=5, padx=10, pady=20, columnspan=4, sticky='news')
+    else:
+        valor_peso = int(box1.get())*100
+        valor_altura = int(box2.get())
+        altura2 = valor_altura*valor_altura
+        imc = (valor_peso / altura2)*100
+        resultado = tk.Label(root, text=f'SEU IMC É\n {imc:,.2f}', font=16)
+        resultado.grid(column=1, row=5, padx=10, pady=20, columnspan=4, sticky='news')
+        if imc < 17:
+            tabpeso = tk.Label(root, text='STATUS FÍSICO:\n Muito baixo do peso recomendado', font=14)
+            tabpeso.grid(column=1, row=6, padx=10, pady=10, columnspan=4, sticky='news')
+        if 17 <= imc <= 18.49:
+            tabpeso = tk.Label(root, text='STATUS FÍSICO:\n Abaixo do peso recomendado', font=14)
+            tabpeso.grid(column=1, row=6, padx=10, pady=10, columnspan=4, sticky='news')
+        if 18.50 <= imc <= 24.99:
+            tabpeso = tk.Label(root, text='STATUS FÍSICO:\n Peso dentro do recomendado', font=14)
+            tabpeso.grid(column=1, row=6, padx=10, pady=10, columnspan=4, sticky='news')
+        if 25 <= imc <= 29.99:
+            tabpeso = tk.Label(root, text='STATUS FÍSICO:\n Acima do peso', font=14)
+            tabpeso.grid(column=1, row=6, padx=10, pady=10, columnspan=4, sticky='news')
+        if 30 <= imc <= 34.99:
+            tabpeso = tk.Label(root, text='STATUS FÍSICO:\n Obesidade I', font=14)
+            tabpeso.grid(column=1, row=6, padx=10, pady=10, columnspan=4, sticky='news')
+        if 35 <= imc <= 39.99:
+            tabpeso = tk.Label(root, text='STATUS FÍSICO:\n Obesidade II (severa)', font=14)
+            tabpeso.grid(column=1, row=6, padx=10, pady=10, columnspan=4, sticky='news')
+        if imc > 40:
+            tabpeso = tk.Label(root, text='STATUS FÍSICO:\n Obesidade III (mórbida)', font=14)
+            tabpeso.grid(column=1, row=6, padx=10, pady=10, columnspan=4, sticky='news')
+
+
+def sair():
+    root.destroy()
+
+
+def limpar():
+    box1.delete(0,'end')
+    box2.delete(0,'end')
+    resultado = tk.Label(root, text='')
+    resultado.grid(column=1, row=5, padx=10, pady=20, columnspan=4, sticky='news')
+    tabpeso = tk.Label(root, text='')
+    tabpeso.grid(column=1, row=6, padx=10, pady=10, columnspan=4, sticky='news')
+
+
+titulo_janela = tk.Label(root, text='CALCULADORA DE IMC', font=12, bg='blue', fg='white')
+titulo_janela.grid(column=1, row=0, padx=10, pady=10, columnspan=4, sticky='news')
+
+titulo_box1 = tk.Label(root, text='Peso')
+titulo_box1.grid(column=1, row=2, padx=3, pady=10)
+
+titulo_box2 = tk.Label(root, text='Altura')
+titulo_box2.grid(column=1, row=3, padx=3, pady=10)
+
+titulo_peso = tk.Label(root, text='Kg').grid(column=3, row=2, padx=10)
+titulo_altura = tk.Label(root, text='cm').grid(column=3, row=3, padx=10)
+
+box1 = tk.Entry(root, width=10)
+box1.grid(column=2, row=2, padx=10, pady=10)
+box2 = tk.Entry(root, width=10)
+box2.grid(column=2, row=3, padx=10, pady=10)
+
+btn_calcular = tk.Button(root, text='Calcular IMC', command=calcular)
+btn_calcular.grid(column=1, row=4, padx=10, pady=10)
+
+btn_limpar = tk.Button(root, text='Limpar', command=limpar)
+btn_limpar.grid(column=2, row=4, padx=10, pady=10)
+
+btn_fechar = tk.Button(root, text='Fechar', width=10, command=sair)
+btn_fechar.grid(column=3, row=4, padx=10, pady=10)
+
+root.mainloop()
