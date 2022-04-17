@@ -1,3 +1,11 @@
+# --------------------------------------------------------------------- #
+# Name: "Calculadora IMC"
+# Version: "1.0.0"
+# Description: "Realiza o Cálculo de Índice de Massa Corporal (IMC)"
+# Author: RohFerreira
+# Language: pt-br
+# --------------------------------------------------------------------- #
+
 import tkinter as tk
 
 root = tk.Tk()
